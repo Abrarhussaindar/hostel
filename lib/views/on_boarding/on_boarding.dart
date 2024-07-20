@@ -110,20 +110,15 @@ class _OnBoardingState extends State<OnBoarding> {
               const Spacer(),
               Padding(
                 padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: Button(
-                            label: "Get Started",
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Login()));
-                            },
-                            isLoading: false)),
-                  ],
-                ),
+                child: ExpandedButton(
+                    label: "Get Started",
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Login()));
+                    },
+                    isLoading: false),
               ),
               const Padding(
                 padding: EdgeInsets.fromLTRB(16, 0, 16, 16),

@@ -88,37 +88,32 @@ class _LoginState extends State<Login> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                      child: Button(
-                          label: "Request OTP",
-                          onPressed: () async {
-                            if (phoneController.text.length < 10 ||
-                                !isNumeric(phoneController.text)) {
-                              setState(() {
-                                phoneValid = false;
-                              });
-                            } else {
-                              setState(() {
-                                isLoading = true;
-                              });
-                              await Future.delayed(const Duration(seconds: 2));
-                              setState(() {
-                                isLoading = false;
-                              });
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => OtpScreen(
-                                          phone: selectedCountryCode +
-                                              phoneController.text)));
-                            }
-                          },
-                          isLoading: isLoading)),
-                ],
-              ),
+              padding: const EdgeInsets.all(8),
+              child: ExpandedButton(
+                  label: "Request OTP",
+                  onPressed: () async {
+                    if (phoneController.text.length < 10 ||
+                        !isNumeric(phoneController.text)) {
+                      setState(() {
+                        phoneValid = false;
+                      });
+                    } else {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      await Future.delayed(const Duration(seconds: 2));
+                      setState(() {
+                        isLoading = false;
+                      });
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OtpScreen(
+                                  phone: selectedCountryCode +
+                                      phoneController.text)));
+                    }
+                  },
+                  isLoading: isLoading),
             )
           ]),
         ),

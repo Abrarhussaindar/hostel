@@ -39,6 +39,29 @@ class Button extends StatelessWidget {
   }
 }
 
+class ExpandedButton extends StatelessWidget {
+  const ExpandedButton(
+      {super.key,
+      required this.label,
+      required this.onPressed,
+      required this.isLoading});
+
+  final String label;
+  final Function() onPressed;
+  final bool isLoading;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+            child: Button(
+                label: label, onPressed: onPressed, isLoading: isLoading)),
+      ],
+    );
+  }
+}
+
 class InputText extends StatelessWidget {
   const InputText(
       {super.key,
@@ -75,7 +98,7 @@ class InputText extends StatelessWidget {
               keyboardType: keyboard,
               inputFormatters: [LengthLimitingTextInputFormatter(max)],
               onChanged: (value) {
-                if (value.length == min) {
+                if (value.length >= min) {
                   updateValid(true);
                 }
               },
