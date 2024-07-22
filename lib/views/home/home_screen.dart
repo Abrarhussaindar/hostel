@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hostel/providers/user_provider.dart';
 import 'package:hostel/views/home/layouts/home_layout.dart';
 import 'package:hostel/views/home/layouts/rooms_layout.dart';
 import 'package:hostel/views/home/layouts/tenants_layout.dart';
 import 'package:hostel/views/home/layouts/tickets_layout.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen(
@@ -68,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 const Text("Welcome",
                     style: TextStyle(color: Colors.blue, fontSize: 17)),
-                Text(widget.name,
+                Text(context.watch<UserProvider>().businessName,
                     style: const TextStyle(fontWeight: FontWeight.w500))
               ],
             ),

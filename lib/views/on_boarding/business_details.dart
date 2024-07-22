@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:hostel/helper/functions.dart';
 import 'package:hostel/helper/ui_elements.dart';
+import 'package:hostel/providers/user_provider.dart';
 import 'package:hostel/views/home/home_screen.dart';
+import 'package:provider/provider.dart';
 
 class BusinessDetails extends StatefulWidget {
   const BusinessDetails({super.key, required this.phone});
@@ -71,11 +73,13 @@ class _BusinessDetailsState extends State<BusinessDetails> {
             child: ExpandedButton(
                 label: "Continue",
                 onPressed: () async {
-                  if (nameController.text.length < 5) {
+                  final businessName = nameController.text.trim();
+                  final businessEmail = emailController.text.trim();
+                  if (businessName.length < 5) {
                     setState(() {
                       nameValid = false;
                     });
-                  } else if (!isValidEmail(emailController.text)) {
+                  } else if (!isValidEmail(businessEmail)) {
                     setState(() {
                       emailValid = false;
                     });
@@ -84,6 +88,9 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                       isLoading = true;
                     });
                     await Future.delayed(const Duration(seconds: 2));
+                    context
+                        .read<UserProvider>()
+                        .changeBusinessName(newBusinessName: businessName);
                     setState(() {
                       isLoading = false;
                     });
@@ -92,8 +99,8 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                         MaterialPageRoute(
                             builder: (context) => HomeScreen(
                                 phone: widget.phone,
-                                name: nameController.text,
-                                email: emailController.text)),
+                                name: businessName,
+                                email: businessEmail)),
                         (route) => false);
                   }
                 },
