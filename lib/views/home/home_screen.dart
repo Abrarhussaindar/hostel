@@ -32,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
         'revenue': 52365,
         'dateRange': '01/08/24 - 31/08/24',
         'percentage': '+0.6',
+        'paidRentPercentage': 70.0,
         'vacantBeds': 12,
         'totalBeds': 150,
         'totalTenant': 138,
